@@ -1,0 +1,16 @@
+{
+  "name": "flowbuild-v2-nodes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@flowbuild/engine": "^2.18.3",
+    "kafkajs": "^2.2.3"
+  }
+}
