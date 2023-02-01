@@ -14,9 +14,19 @@ const connect = async () => {
     
     await producer.connect()
     await consumer.connect()
-    await consumer.subscribe({ topic: 'start-nodes-topic', fromBeginning: true })
-    await consumer.subscribe({ topic: 'finish-nodes-topic', fromBeginning: true })
-    await consumer.subscribe({ topic: 'http-nodes-topic', fromBeginning: true })
+
+    const topics = [
+      'start-nodes-topic',
+      'finish-nodes-topic',
+      'http-nodes-topic',
+      'form-request-nodes-topic',
+      'flow-nodes-topic',
+      'js-script-task-nodes-topic',
+      'user-task-nodes-topic',
+      'timer-nodes-topic'
+    ]
+
+    for (let topic of topics) await consumer.subscribe({ topic , fromBeginning: false })
 
     NodeExecutionManager.producer = producer
     manager.connect(consumer)

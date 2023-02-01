@@ -1,6 +1,9 @@
 const {
     Nodes
 } = require('@flowbuild/engine')
+const {
+    CustomTimerSystemTaskNode
+} = require('./timer')
 
 class NodeExecutionManager {
 
@@ -33,13 +36,17 @@ class NodeExecutionManager {
         const nodeMap = {
             'start-nodes-topic': Nodes.StartNode,
             'http-nodes-topic': Nodes.HttpSystemTaskNode,
-            'finish-nodes-topic': Nodes.FinishNode
+            'finish-nodes-topic': Nodes.FinishNode,
+            'form-request-nodes-topic': Nodes.FormRequestNode,
+            'flow-nodes-topic': Nodes.FlowNode,
+            'js-script-task-nodes-topic': Nodes.ScriptTaskNode,
+            'timer-nodes-topic': CustomTimerSystemTaskNode,
+            'user-task-nodes-topic': Nodes.UserTaskNode,
         }
         const node = new nodeMap[topic](action.node_spec)
         const result = await node.run({...action.execution_data})
-        //ToDo: Node execution
 
-        console.info("RESULT: ", result)
+        console.info("RESULT: ", { result, timestamp: Date.now() })
 
         const messageValue = {
             result,
