@@ -54,15 +54,6 @@ class NodeExecutionManager {
             process_id: action.process_id
         }
 
-        if(topic==='finish-nodes-topic') {
-            await NodeExecutionManager.producer.send({
-                topic: 'orchestrator-finish-topic',
-                messages: [
-                    { value: JSON.stringify(messageValue) },
-                ],
-            })    
-        }
-
         await NodeExecutionManager.producer.send({
             topic: 'orchestrator-result-topic',
             messages: [
