@@ -51,7 +51,8 @@ class NodeExecutionManager {
         const messageValue = {
             result,
             workflow_name: action.workflow_name,
-            process_id: action.process_id
+            process_id: action.process_id,
+            actor: action.actor
         }
 
         await NodeExecutionManager.producer.send({
