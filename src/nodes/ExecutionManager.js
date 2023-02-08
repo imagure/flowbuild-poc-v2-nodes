@@ -1,6 +1,8 @@
 const {
     Nodes
-} = require('@flowbuild/engine')
+} = require('@flowbuild/engine');
+const { get } = require('../utils/get');
+const { set } = require('../utils/set');
 const {
     CustomTimerSystemTaskNode
 } = require('./timer')
@@ -32,6 +34,18 @@ class NodeExecutionManager {
         return this
     }
 
+    extractResultToBag(source, spec) {
+        if(!spec) {
+            return {}
+        }
+        const bag = {}
+        const readValues = spec.map((path) => [path, get(source, path)])
+        for(let [path, value] of readValues) {
+            set(bag, path, value)
+        }
+        return bag
+    }
+
     async runAction(topic, action) {
         const nodeMap = {
             'start-nodes-topic': Nodes.StartNode,
@@ -49,7 +63,10 @@ class NodeExecutionManager {
         console.info("RESULT: ", { result, timestamp: Date.now() })
 
         const messageValue = {
-            result,
+            result: {
+                ...result,
+                bag: this.extractResultToBag(result.result, action.node_spec.extract)
+            },
             workflow_name: action.workflow_name,
             process_id: action.process_id,
             actor: action.actor
