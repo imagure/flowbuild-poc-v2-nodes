@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@flowbuild/engine": "2.19.0-beta.8",
-    "kafkajs": "^2.2.3"
+    "kafkajs": "^2.2.3",
+    "redis": "^4.6.4"
   }
 }

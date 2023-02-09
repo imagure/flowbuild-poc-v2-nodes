@@ -1,5 +1,6 @@
 const { Kafka } = require('kafkajs')
 const { NodeExecutionManager } = require('../nodes/ExecutionManager')
+const { CustomEventNode } = require('../nodes/CustomEventNode')
 
 const kafka = new Kafka({
   clientId: 'flowbuild-v2-nodes',
@@ -31,6 +32,7 @@ const connect = async () => {
     for (let topic of topics) await consumer.subscribe({ topic , fromBeginning: false })
 
     NodeExecutionManager.producer = producer
+    CustomEventNode.producer = producer
     manager.connect(consumer)
 }
 
