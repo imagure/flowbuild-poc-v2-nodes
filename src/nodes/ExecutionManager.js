@@ -73,7 +73,7 @@ class NodeExecutionManager {
         const messageValue = {
             result: {
                 ...result,
-                bag: this.extractResultToBag(result.result, action.node_spec.extract)
+                bag: this.extractResultToBag(result, action.node_spec.extract)
             },
             workflow_name: action.workflow_name,
             process_id: action.process_id,
