@@ -23,7 +23,9 @@ const connect = async () => {
       'flow-nodes-topic',
       'js-script-task-nodes-topic',
       'user-task-nodes-topic',
-      'timer-nodes-topic'
+      'timer-nodes-topic',
+      'system-task-nodes-topic',
+      'event-nodes-topic',
     ]
 
     for (let topic of topics) await consumer.subscribe({ topic , fromBeginning: false })
